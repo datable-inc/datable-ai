@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "datable-ai"
-version = "0.0.2"
+version = "0.0.3"
 description = "datable-ai"
 authors = ["datable <dev@datable.jp>"]
 license = "MIT"
@@ -13,6 +13,8 @@ langchain-openai = "^0.1.3"
 python-dotenv = "^1.0.1"
 langchain-anthropic = "^0.1.11"
 pytest = "^8.1.1"
+tiktoken = "^0.6.0"
+langchain = "^0.1.16"
 
 
 [tool.poetry.group.dev.dependencies]
