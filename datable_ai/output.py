@@ -1,3 +1,4 @@
+import json
 import os
 
 import tiktoken
@@ -21,13 +22,14 @@ class Output:
         self.prompt = ChatPromptTemplate.from_template(self.prompt_template)
         self.llm = create_llm(self.llm_type)
         self.encoding_name = self._encoding_name()
+        self.max_tokens = self._max_tokens(self.encoding_name)
 
     def invoke(self, **kwargs):
         try:
             summarized_kwargs = {}
             for key, value in kwargs.items():
                 num_tokens = self._num_tokens_from_string(value)
-                if num_tokens > 8000:
+                if num_tokens > self.max_tokens:
                     summarized_value = self._summarize(value)
                     summarized_kwargs[key] = summarized_value["output_text"]
                 else:
@@ -40,7 +42,15 @@ class Output:
 
     def _num_tokens_from_string(self, text: str) -> int:
         try:
-            encoding = tiktoken.encoding_for_model(self.encoding_name)
+            if (
+                self.llm_type == LLM_TYPE.OPENAI
+                or self.llm_type == LLM_TYPE.AZURE_OPENAI
+            ):
+                encoding = tiktoken.encoding_for_model(self.encoding_name)
+            elif self.llm_type == LLM_TYPE.ANTHROPIC:
+                encoding = tiktoken.get_encoding("cl100k_base")
+            else:
+                encoding = tiktoken.get_encoding("gpt2")
             num_tokens = len(encoding.encode(text))
             return num_tokens
         except Exception as e:
@@ -49,7 +59,7 @@ class Output:
     def _summarize(self, long_text: str):
         try:
             text_splitter = CharacterTextSplitter.from_tiktoken_encoder(
-                chunk_size=7000, chunk_overlap=100
+                chunk_size=1000, chunk_overlap=50
             )
             split_docs = text_splitter.split_text(long_text)
             docs = [Document(page_content=chunk) for chunk in split_docs]
@@ -68,3 +78,13 @@ class Output:
             return os.environ.get("ANTHROPIC_API_MODEL")
         else:
             raise ValueError(f"Unsupported LLM type: {self.llm_type}")
+
+    def _max_tokens(self, model_name: str):
+        with open("models.json", "r") as file:
+            model_configs = json.load(file)
+
+        for _provider, models in model_configs.items():
+            if model_name in models:
+                return models[model_name].get("max_tokens", 8000)
+
+        return 8000
