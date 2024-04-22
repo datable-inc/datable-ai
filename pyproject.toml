@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "datable-ai"
-version = "0.0.4"
+version = "0.0.5"
 description = "datable-ai"
 authors = ["datable <dev@datable.jp>"]
 license = "MIT"
 readme = "README.md"
+include = ["models.json"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
