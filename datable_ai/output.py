@@ -1,4 +1,3 @@
-import json
 import os
 
 import tiktoken
@@ -80,8 +79,22 @@ class Output:
             raise ValueError(f"Unsupported LLM type: {self.llm_type}")
 
     def _max_tokens(self, model_name: str):
-        with open("models.json", "r") as file:
-            model_configs = json.load(file)
+        model_configs = {
+            "openai": {
+                "gpt-4": {"max_tokens": 8000},
+                "gpt-4-32k": {"max_tokens": 32000},
+                "gpt-4-turbo": {"max_tokens": 128000},
+                "gpt-4-turbo-2024-04-09": {},
+                "gpt-4-turbo-preview": {},
+                "gpt-4-0125-preview": {},
+                "gpt-3.5-turbo": {},
+            },
+            "anthropic": {
+                "claude-3-opus-20240229": {"max_tokens": 200000},
+                "claude-3-sonnet-20240229": {"max_tokens": 200000},
+                "claude-3-haiku-20240307": {"max_tokens": 200000},
+            },
+        }
 
         for _provider, models in model_configs.items():
             if model_name in models:
