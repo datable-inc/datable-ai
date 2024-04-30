@@ -22,6 +22,8 @@ langchain = "^0.1.16"
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"
 ruff = "^0.4.2"
+sphinx = "^7.3.7"
+cloud-sptheme = "^1.10.1.post20200504175005"
 
 [build-system]
 requires = ["poetry-core"]
