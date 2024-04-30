@@ -11,6 +11,14 @@ from datable_ai.core.llm import LLM_TYPE, create_llm
 
 
 class Output:
+    """
+    A class for generating output using a language model.
+
+    Args:
+        llm_type (LLM_TYPE): The type of language model to use.
+        prompt_template (str): The prompt template to use for generating output.
+    """
+
     def __init__(
         self,
         llm_type: LLM_TYPE,
@@ -24,6 +32,18 @@ class Output:
         self.max_tokens = self._max_tokens(self.encoding_name)
 
     def invoke(self, **kwargs):
+        """
+        Generates output using the language model.
+
+        Args:
+            **kwargs: Keyword arguments to pass to the prompt template.
+
+        Returns:
+            The generated output.
+
+        Raises:
+            RuntimeError: If an error occurs while generating output.
+        """
         try:
             summarized_kwargs = {}
             for key, value in kwargs.items():
@@ -40,6 +60,18 @@ class Output:
             raise RuntimeError(f"Error invoking Output: {str(e)}") from e
 
     def _num_tokens_from_string(self, text: str) -> int:
+        """
+        Calculates the number of tokens in a string.
+
+        Args:
+            text (str): The string to calculate the number of tokens for.
+
+        Returns:
+            The number of tokens in the string.
+
+        Raises:
+            RuntimeError: If an error occurs while calculating the number of tokens.
+        """
         try:
             if (
                 self.llm_type == LLM_TYPE.OPENAI
@@ -56,6 +88,18 @@ class Output:
             raise RuntimeError(f"Error calculating number of tokens: {str(e)}") from e
 
     def _summarize(self, long_text: str):
+        """
+        Summarizes a long text into a shorter text.
+
+        Args:
+            long_text (str): The long text to summarize.
+
+        Returns:
+            A dictionary containing the summarized text.
+
+        Raises:
+            RuntimeError: If an error occurs while summarizing the text.
+        """
         try:
             text_splitter = CharacterTextSplitter.from_tiktoken_encoder(
                 chunk_size=1000, chunk_overlap=50
@@ -69,6 +113,15 @@ class Output:
             raise RuntimeError(f"Error summarizing text: {str(e)}") from e
 
     def _encoding_name(self):
+        """
+        Returns the encoding name for the language model.
+
+        Returns:
+            The encoding name for the language model.
+
+        Raises:
+            ValueError: If the language model type is unsupported.
+        """
         if self.llm_type == LLM_TYPE.OPENAI:
             return os.environ.get("OPENAI_API_MODEL")
         elif self.llm_type == LLM_TYPE.AZURE_OPENAI:
@@ -79,6 +132,15 @@ class Output:
             raise ValueError(f"Unsupported LLM type: {self.llm_type}")
 
     def _max_tokens(self, model_name: str):
+        """
+        Returns the maximum number of tokens for the specified model.
+
+        Args:
+            model_name (str): The name of the model.
+
+        Returns:
+            The maximum number of tokens for the specified model.
+        """
         model_configs = {
             "openai": {
                 "gpt-4": {"max_tokens": 8000},

@@ -6,6 +6,15 @@ from datable_ai.core.llm import LLM_TYPE, create_llm
 
 
 class StructuredOutput:
+    """
+    A class for generating structured output using a language model.
+
+    Args:
+        llm_type (LLM_TYPE): The type of language model to use.
+        prompt_template (str): The prompt template to use for generating output.
+        output_fields (List[Dict[str, Any]]): A list of dictionaries representing the fields of the structured output.
+    """
+
     def __init__(
         self,
         llm_type: LLM_TYPE,
@@ -19,6 +28,15 @@ class StructuredOutput:
         self.output_model = self._create_dynamic_model()
 
     def invoke(self, **kwargs) -> str:
+        """
+        Generates structured output using the language model.
+
+        Args:
+            **kwargs: Keyword arguments to pass to the prompt template.
+
+        Returns:
+            The generated structured output as a JSON string.
+        """
         prompt = self.prompt_template.format(**kwargs)
         return (
             self.llm.with_structured_output(self.output_model)
@@ -27,6 +45,12 @@ class StructuredOutput:
         )
 
     def _create_dynamic_model(self) -> Type[BaseModel]:
+        """
+        Creates a dynamic Pydantic model based on the output fields.
+
+        Returns:
+            A Pydantic model representing the structured output.
+        """
         field_definitions = {}
 
         for field in self.output_fields:
