@@ -40,7 +40,7 @@ class Transcription:
         Returns:
             The created client object.
         """
-        api_key = os.getenv("DEEPGRAM_API_KEY")
+        api_key = os.environ.get("DEEPGRAM_API_KEY")
         config = DeepgramClientOptions()
         return DeepgramClient(api_key, config)
 
