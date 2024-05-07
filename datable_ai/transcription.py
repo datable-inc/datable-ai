@@ -7,10 +7,7 @@ from deepgram import (
     FileSource,
     PrerecordedOptions,
 )
-from dotenv import load_dotenv
 from pydub import AudioSegment
-
-load_dotenv()
 
 
 class TRANSCRIPTION_TYPE(str, Enum):
