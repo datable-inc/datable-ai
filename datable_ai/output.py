@@ -2,12 +2,12 @@ import os
 
 import tiktoken
 from langchain.chains.summarize import load_summarize_chain
-from langchain.docstore.document import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_text_splitters import CharacterTextSplitter
 
 from datable_ai.core.llm import LLM_TYPE, create_llm
+from langchain_core.documents import Document
 
 
 class Output:
