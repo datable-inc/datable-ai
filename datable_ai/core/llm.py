@@ -41,6 +41,7 @@ def create_llm(llm_name: LLM_TYPE) -> BaseChatModel:
             azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
             openai_api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
             deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
+            model_name=os.getenv("AZURE_OPENAI_API_MODEL"),
             temperature=0.1,
         )
     elif llm_name == LLM_TYPE.ANTHROPIC:
@@ -79,6 +80,7 @@ def _create_azure_chat_openai(
     openai_api_version: str,
     deployment_name: str,
     temperature: float,
+    model_name: str,
 ) -> AzureChatOpenAI:
     """
     Create an instance of AzureChatOpenAI.
@@ -101,6 +103,7 @@ def _create_azure_chat_openai(
         deployment_name=deployment_name,
         temperature=temperature,
         streaming=True,
+        model_name=model_name,
         client=openai.chat.completions,
     )
 
