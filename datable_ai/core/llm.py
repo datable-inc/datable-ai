@@ -4,6 +4,7 @@ from enum import Enum
 import openai
 from langchain_anthropic import ChatAnthropic
 from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import AzureChatOpenAI, ChatOpenAI
 
 
@@ -15,6 +16,7 @@ class LLM_TYPE(str, Enum):
     OPENAI = "OPENAI"
     AZURE_OPENAI = "AZURE_OPENAI"
     ANTHROPIC = "ANTHROPIC"
+    GOOGLE = "GOOGLE"
 
 
 def create_llm(llm_name: LLM_TYPE) -> BaseChatModel:
@@ -48,6 +50,12 @@ def create_llm(llm_name: LLM_TYPE) -> BaseChatModel:
         return _create_chat_anthropic(
             anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"),
             model_name=os.getenv("ANTHROPIC_API_MODEL"),
+            temperature=0.1,
+        )
+    elif llm_name == LLM_TYPE.GOOGLE:
+        return _create_chat_google(
+            google_api_key=os.getenv("GOOGLE_API_KEY"),
+            model_name=os.getenv("GOOGLE_API_MODEL"),
             temperature=0.1,
         )
     else:
@@ -127,4 +135,25 @@ def _create_chat_anthropic(
         model=model_name,
         temperature=temperature,
         streaming=True,
+    )
+
+
+def _create_chat_google(
+    google_api_key: str, model_name: str, temperature: float
+) -> ChatGoogleGenerativeAI:
+    """
+    Create an instance of ChatGoogleGenerativeAI.
+
+    Args:
+        google_api_key (str): The Google API key.
+        model_name (str): The name of the Google model to use.
+        temperature (float): The temperature value for the model.
+
+    Returns:
+        ChatGoogleGenerativeAI: An instance of ChatGoogleGenerativeAI.
+    """
+    return ChatGoogleGenerativeAI(
+        google_api_key=google_api_key,
+        model=model_name,
+        temperature=temperature,
     )

@@ -128,6 +128,8 @@ class Output:
             return os.environ.get("AZURE_OPENAI_API_MODEL")
         elif self.llm_type == LLM_TYPE.ANTHROPIC:
             return os.environ.get("ANTHROPIC_API_MODEL")
+        elif self.llm_type == LLM_TYPE.GOOGLE:
+            return os.environ.get("GOOGLE_API_MODEL")
         else:
             raise ValueError(f"Unsupported LLM type: {self.llm_type}")
 
@@ -156,6 +158,9 @@ class Output:
                 "claude-3-opus-20240229": {"max_tokens": 200000},
                 "claude-3-sonnet-20240229": {"max_tokens": 200000},
                 "claude-3-haiku-20240307": {"max_tokens": 200000},
+            },
+            "google": {
+                "gemini-1.5-pro": {"max_tokens": 128000},
             },
         }
 
