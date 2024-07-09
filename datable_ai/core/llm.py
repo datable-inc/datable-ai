@@ -6,6 +6,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import AzureChatOpenAI, ChatOpenAI
+from langfuse.callback import CallbackHandler
 
 
 class LLM_TYPE(str, Enum):
@@ -17,6 +18,19 @@ class LLM_TYPE(str, Enum):
     AZURE_OPENAI = "AZURE_OPENAI"
     ANTHROPIC = "ANTHROPIC"
     GOOGLE = "GOOGLE"
+
+
+def create_langfuse_handler() -> CallbackHandler:
+    """
+    Create an instance of the Langfuse handler.
+    """
+    langfuse_handler = CallbackHandler(
+        secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
+        public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
+        host=os.getenv("LANGFUSE_HOST"),
+    )
+    assert langfuse_handler.auth_check()
+    return langfuse_handler
 
 
 def create_llm(llm_name: LLM_TYPE) -> BaseChatModel:
