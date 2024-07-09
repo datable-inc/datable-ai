@@ -29,7 +29,6 @@ def create_langfuse_handler() -> CallbackHandler:
         public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
         host=os.getenv("LANGFUSE_HOST"),
     )
-    assert langfuse_handler.auth_check()
     return langfuse_handler
 
 
