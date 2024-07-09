@@ -49,6 +49,7 @@ def create_llm(llm_name: LLM_TYPE) -> BaseChatModel:
         return _create_chat_openai(
             model_name=os.getenv("OPENAI_API_MODEL"),
             temperature=0.1,
+            max_tokens=int(os.getenv("OPENAI_MAX_TOKENS", 4096)),
         )
     elif llm_name == LLM_TYPE.AZURE_OPENAI:
         return _create_azure_chat_openai(
@@ -58,30 +59,36 @@ def create_llm(llm_name: LLM_TYPE) -> BaseChatModel:
             deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
             model_name=os.getenv("AZURE_OPENAI_API_MODEL"),
             temperature=0.1,
+            max_tokens=int(os.getenv("AZURE_OPENAI_MAX_TOKENS", 4096)),
         )
     elif llm_name == LLM_TYPE.ANTHROPIC:
         return _create_chat_anthropic(
             anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"),
             model_name=os.getenv("ANTHROPIC_API_MODEL"),
             temperature=0.1,
+            max_tokens=int(os.getenv("ANTHROPIC_MAX_TOKENS", 4096)),
         )
     elif llm_name == LLM_TYPE.GOOGLE:
         return _create_chat_google(
             google_api_key=os.getenv("GOOGLE_API_KEY"),
             model_name=os.getenv("GOOGLE_API_MODEL"),
             temperature=0.1,
+            max_tokens=int(os.getenv("GOOGLE_MAX_TOKENS", 4096)),
         )
     else:
         raise ValueError(f"Unsupported LLM type: {llm_name}")
 
 
-def _create_chat_openai(model_name: str, temperature: float) -> ChatOpenAI:
+def _create_chat_openai(
+    model_name: str, temperature: float, max_tokens: int
+) -> ChatOpenAI:
     """
     Create an instance of ChatOpenAI.
 
     Args:
         model_name (str): The name of the OpenAI model to use.
         temperature (float): The temperature value for the model.
+        max_tokens (int): The maximum number of tokens for the model.
 
     Returns:
         ChatOpenAI: An instance of ChatOpenAI.
@@ -90,6 +97,7 @@ def _create_chat_openai(model_name: str, temperature: float) -> ChatOpenAI:
     return ChatOpenAI(
         model_name=model_name,
         temperature=temperature,
+        max_tokens=max_tokens,
         streaming=True,
         client=openai.chat.completions,
     )
@@ -102,6 +110,7 @@ def _create_azure_chat_openai(
     deployment_name: str,
     temperature: float,
     model_name: str,
+    max_tokens: int,
 ) -> AzureChatOpenAI:
     """
     Create an instance of AzureChatOpenAI.
@@ -112,6 +121,7 @@ def _create_azure_chat_openai(
         openai_api_version (str): The OpenAI API version.
         deployment_name (str): The name of the Azure OpenAI deployment.
         temperature (float): The temperature value for the model.
+        max_tokens (int): The maximum number of tokens for the model.
 
     Returns:
         AzureChatOpenAI: An instance of AzureChatOpenAI.
@@ -123,6 +133,7 @@ def _create_azure_chat_openai(
         openai_api_version=openai_api_version,
         deployment_name=deployment_name,
         temperature=temperature,
+        max_tokens=max_tokens,
         streaming=True,
         model_name=model_name,
         client=openai.chat.completions,
@@ -130,7 +141,7 @@ def _create_azure_chat_openai(
 
 
 def _create_chat_anthropic(
-    anthropic_api_key: str, model_name: str, temperature: float
+    anthropic_api_key: str, model_name: str, temperature: float, max_tokens: int
 ) -> ChatAnthropic:
     """
     Create an instance of ChatAnthropic.
@@ -139,6 +150,7 @@ def _create_chat_anthropic(
         anthropic_api_key (str): The Anthropic API key.
         model_name (str): The name of the Anthropic model to use.
         temperature (float): The temperature value for the model.
+        max_tokens (int): The maximum number of tokens for the model.
 
     Returns:
         ChatAnthropic: An instance of ChatAnthropic.
@@ -147,12 +159,13 @@ def _create_chat_anthropic(
         anthropic_api_key=anthropic_api_key,
         model=model_name,
         temperature=temperature,
+        max_tokens=max_tokens,
         streaming=True,
     )
 
 
 def _create_chat_google(
-    google_api_key: str, model_name: str, temperature: float
+    google_api_key: str, model_name: str, temperature: float, max_tokens: int
 ) -> ChatGoogleGenerativeAI:
     """
     Create an instance of ChatGoogleGenerativeAI.
@@ -161,6 +174,7 @@ def _create_chat_google(
         google_api_key (str): The Google API key.
         model_name (str): The name of the Google model to use.
         temperature (float): The temperature value for the model.
+        max_tokens (int): The maximum number of tokens for the model.
 
     Returns:
         ChatGoogleGenerativeAI: An instance of ChatGoogleGenerativeAI.
@@ -169,4 +183,5 @@ def _create_chat_google(
         google_api_key=google_api_key,
         model=model_name,
         temperature=temperature,
+        max_tokens=max_tokens,
     )
