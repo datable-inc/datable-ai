@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Optional, Type
 
 from langchain_core.pydantic_v1 import BaseModel, Field, create_model
 
-from datable_ai.core.llm import LLM_TYPE, create_llm
+from datable_ai.core.llm import LLM_TYPE, create_langfuse_handler, create_llm
 
 
 class StructuredOutput:
@@ -40,7 +40,10 @@ class StructuredOutput:
         prompt = self.prompt_template.format(**kwargs)
         return (
             self.llm.with_structured_output(self.output_model)
-            .invoke(prompt)
+            .invoke(
+                prompt,
+                config={"callbacks": [create_langfuse_handler()]},
+            )
             .json(ensure_ascii=False)
         )
 

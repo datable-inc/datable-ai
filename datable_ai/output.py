@@ -7,7 +7,11 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_text_splitters import CharacterTextSplitter
 
-from datable_ai.core.llm import LLM_TYPE, create_llm
+from datable_ai.core.llm import (
+    LLM_TYPE,
+    create_langfuse_handler,
+    create_llm,
+)
 
 
 class Output:
@@ -55,7 +59,10 @@ class Output:
                     summarized_kwargs[key] = value
 
             chain = self.prompt | self.llm | StrOutputParser()
-            return chain.invoke(summarized_kwargs)
+            return chain.invoke(
+                summarized_kwargs,
+                config={"callbacks": [create_langfuse_handler()]},
+            )
         except Exception as e:
             raise RuntimeError(f"Error invoking Output: {str(e)}") from e
 
