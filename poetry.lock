@@ -1315,13 +1315,13 @@ langchain-core = ">=0.2.10,<0.3.0"
 
 [[package]]
 name = "langfuse"
-version = "2.38.1"
+version = "2.39.0"
 description = "A client library for accessing langfuse"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langfuse-2.38.1-py3-none-any.whl", hash = "sha256:df96b106e7f12dbc4471c4d4794f79d3b581aa7e56e6de5122bc4c6d7a9d12fd"},
-    {file = "langfuse-2.38.1.tar.gz", hash = "sha256:e077dd32d468c3781cd9e27b814fb3d2e3ea3b0c6b826d4a66efe08b86f925a3"},
+    {file = "langfuse-2.39.0-py3-none-any.whl", hash = "sha256:133cbaa28adf7809accedac8fe6a9fda304230b78f3b1ffff014954070e173cc"},
+    {file = "langfuse-2.39.0.tar.gz", hash = "sha256:6347b769564daaf36bdefa97b75f38bd2ec5c6cff47188acc871d86be52485b7"},
 ]
 
 [package.dependencies]
