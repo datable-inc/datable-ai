@@ -431,13 +431,13 @@ typing-inspect = ">=0.4.0,<1"
 
 [[package]]
 name = "deepgram-sdk"
-version = "3.3.2"
+version = "3.4.0"
 description = "The official Python SDK for the Deepgram automated speech recognition platform."
 optional = false
 python-versions = "*"
 files = [
-    {file = "deepgram_sdk-3.3.2-py3-none-any.whl", hash = "sha256:da0ad91e7baf58d7f919e25636f591eeb843837d65b3f5e99249aea874dcf3b0"},
-    {file = "deepgram_sdk-3.3.2.tar.gz", hash = "sha256:6be0ef0848f7de2281f93ccc2d5a32f03c06702f117c630ffc76ae32cef22da3"},
+    {file = "deepgram_sdk-3.4.0-py3-none-any.whl", hash = "sha256:5adf96b7d69b07fc06139260cabed6f06506e751f5753ca052e0e84ab8909cd8"},
+    {file = "deepgram_sdk-3.4.0.tar.gz", hash = "sha256:7a39c482cab06cd4e7b8c590471396fdc9620e9f60d0efe1982461df80e03aff"},
 ]
 
 [package.dependencies]
@@ -445,6 +445,7 @@ aenum = ">=3.1.0"
 aiofiles = ">=23.2.1"
 aiohttp = ">=3.9.1"
 dataclasses-json = ">=0.6.3"
+deprecation = ">=2.1.0"
 httpx = ">=0.25.2"
 typing-extensions = ">=4.9.0"
 websockets = ">=12.0"
@@ -459,6 +460,20 @@ files = [
     {file = "defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61"},
     {file = "defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"},
 ]
+
+[[package]]
+name = "deprecation"
+version = "2.1.0"
+description = "A library to handle automated deprecations"
+optional = false
+python-versions = "*"
+files = [
+    {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
+    {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
+]
+
+[package.dependencies]
+packaging = "*"
 
 [[package]]
 name = "distlib"
