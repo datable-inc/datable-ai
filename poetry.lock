@@ -1260,13 +1260,13 @@ langchain-core = ">=0.2.17,<0.3"
 
 [[package]]
 name = "langchain-core"
-version = "0.2.19"
+version = "0.2.26"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langchain_core-0.2.19-py3-none-any.whl", hash = "sha256:5b3cd34395be274c89e822c84f0e03c4da14168c177a83921c5b9414ac7a0651"},
-    {file = "langchain_core-0.2.19.tar.gz", hash = "sha256:13043a83e5c9ab58b9f5ce2a56896e7e88b752e8891b2958960a98e71801471e"},
+    {file = "langchain_core-0.2.26-py3-none-any.whl", hash = "sha256:ab7bc58d8037349d06ad8c3eee2ea776e26af7f57cce330eecbed5b98e1c4d56"},
+    {file = "langchain_core-0.2.26.tar.gz", hash = "sha256:20c7792eb6c256dc50892d41f07f7fd8e12e5868dbb059fa316a278977bdf4f6"},
 ]
 
 [package.dependencies]
@@ -1279,6 +1279,7 @@ pydantic = [
 ]
 PyYAML = ">=5.3"
 tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<9.0.0"
+typing-extensions = ">=4.7"
 
 [[package]]
 name = "langchain-google-genai"
@@ -1300,17 +1301,17 @@ images = ["pillow (>=10.1.0,<11.0.0)"]
 
 [[package]]
 name = "langchain-openai"
-version = "0.1.16"
+version = "0.1.20"
 description = "An integration package connecting OpenAI and LangChain"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langchain_openai-0.1.16-py3-none-any.whl", hash = "sha256:bff90e9d0be786495920a7851ae4d55247fb084d3a11d1b15bfe91904ce1cb0f"},
-    {file = "langchain_openai-0.1.16.tar.gz", hash = "sha256:3dedcc785a64a488ad6a313cc59b0dccea025d27413b55cec73a20dcf3ded4da"},
+    {file = "langchain_openai-0.1.20-py3-none-any.whl", hash = "sha256:232ebfe90b1898ef7cf181e364d45191edcf04bfc31b292ecaa1d2121942c28e"},
+    {file = "langchain_openai-0.1.20.tar.gz", hash = "sha256:2c91e9f771541076b138e65dd4c5427b26957a2272406a7f4ee747d7896f9b35"},
 ]
 
 [package.dependencies]
-langchain-core = ">=0.2.17,<0.3.0"
+langchain-core = ">=0.2.26,<0.3.0"
 openai = ">=1.32.0,<2.0.0"
 tiktoken = ">=0.7,<1"
 
