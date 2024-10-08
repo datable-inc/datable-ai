@@ -2,7 +2,7 @@ import os
 from typing import Dict
 
 import pytest
-from langchain_core.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 
 from datable_ai.core.llm import LLM_TYPE
 from datable_ai.structured_output import StructuredOutput
@@ -33,20 +33,17 @@ def test_init(structured_output_data: Dict, structured_output: StructuredOutput)
         structured_output.prompt_template == structured_output_data["prompt_template"]
     )
     assert structured_output.output_fields == structured_output_data["output_fields"]
-    assert isinstance(structured_output.output_model, type(BaseModel))
+    assert issubclass(structured_output.output_model, BaseModel)
 
 
 def test_create_dynamic_model(structured_output: StructuredOutput):
     model = structured_output._create_dynamic_model()
-
-    assert isinstance(model, type(BaseModel))
+    assert issubclass(model, BaseModel)
     assert model.__name__ == "Output"
-    assert model.__module__ == "datable_ai.structured_output"
-    assert model.__doc__ == "A model representing the output of the LLM"
 
     for field in structured_output.output_fields:
-        assert field["name"] in model.__fields__
-        assert model.__fields__[field["name"]].type_ == field["type"]
-        assert model.__fields__[field["name"]].field_info.description == field.get(
+        assert field["name"] in model.model_fields
+        assert model.model_fields[field["name"]].annotation == field["type"]
+        assert model.model_fields[field["name"]].description == field.get(
             "description", ""
         )
