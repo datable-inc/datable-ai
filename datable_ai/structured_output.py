@@ -1,6 +1,7 @@
+import json
 from typing import Any, Dict, List, Optional, Type
 
-from langchain_core.pydantic_v1 import BaseModel, Field, create_model
+from pydantic import BaseModel, Field, create_model
 
 from datable_ai.core.llm import LLM_TYPE, create_langfuse_handler, create_llm
 
@@ -38,14 +39,11 @@ class StructuredOutput:
             The generated structured output as a JSON string.
         """
         prompt = self.prompt_template.format(**kwargs)
-        return (
-            self.llm.with_structured_output(self.output_model)
-            .invoke(
-                prompt,
-                config={"callbacks": [create_langfuse_handler()]},
-            )
-            .json(ensure_ascii=False)
+        result = self.llm.with_structured_output(self.output_model).invoke(
+            prompt,
+            config={"callbacks": [create_langfuse_handler()]},
         )
+        return json.dumps(result.model_dump(), ensure_ascii=False)
 
     def _create_dynamic_model(self) -> Type[BaseModel]:
         """
