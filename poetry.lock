@@ -1300,8 +1300,8 @@ langchain-core = ">=0.3.8,<0.4.0"
 langchain-text-splitters = ">=0.3.0,<0.4.0"
 langsmith = ">=0.1.17,<0.2.0"
 numpy = [
-    {version = ">=1.26.0,<2.0.0", markers = "python_version >= \"3.12\""},
     {version = ">=1,<2", markers = "python_version < \"3.12\""},
+    {version = ">=1.26.0,<2.0.0", markers = "python_version >= \"3.12\""},
 ]
 pydantic = ">=2.7.4,<3.0.0"
 PyYAML = ">=5.3"
@@ -1342,8 +1342,8 @@ jsonpatch = ">=1.33,<2.0"
 langsmith = ">=0.1.125,<0.2.0"
 packaging = ">=23.2,<25"
 pydantic = [
-    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
     {version = ">=2.5.2,<3.0.0", markers = "python_full_version < \"3.12.4\""},
+    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
 ]
 PyYAML = ">=5.3"
 tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<9.0.0"
@@ -1400,13 +1400,13 @@ langchain-core = ">=0.3.0,<0.4.0"
 
 [[package]]
 name = "langfuse"
-version = "2.51.4"
+version = "2.52.0"
 description = "A client library for accessing langfuse"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langfuse-2.51.4-py3-none-any.whl", hash = "sha256:67af3be261e057627684aa1e7d26f7883772d7ae6512ef198acc3a59b1bfd1a7"},
-    {file = "langfuse-2.51.4.tar.gz", hash = "sha256:1062d956b05735b83ef0c481e561a29bc9da3a319ebbacbb720717883806cf88"},
+    {file = "langfuse-2.52.0-py3-none-any.whl", hash = "sha256:f2497966bd31adedbb2d643fde3b15cf0387cfbcdac8ebc2db2b6df9413b888a"},
+    {file = "langfuse-2.52.0.tar.gz", hash = "sha256:3ceb8803cb5991dd1127167a2b1288c7c6edc43429547ded1d6dc9e064e6e5cd"},
 ]
 
 [package.dependencies]
@@ -1438,8 +1438,8 @@ files = [
 httpx = ">=0.23.0,<1"
 orjson = ">=3.9.14,<4.0.0"
 pydantic = [
-    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
     {version = ">=1,<3", markers = "python_full_version < \"3.12.4\""},
+    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
 ]
 requests = ">=2,<3"
 requests-toolbelt = ">=1.0.0,<2.0.0"
@@ -2028,8 +2028,8 @@ files = [
 annotated-types = ">=0.6.0"
 pydantic-core = "2.23.4"
 typing-extensions = [
-    {version = ">=4.12.2", markers = "python_version >= \"3.13\""},
     {version = ">=4.6.1", markers = "python_version < \"3.13\""},
+    {version = ">=4.12.2", markers = "python_version >= \"3.13\""},
 ]
 
 [package.extras]
