@@ -458,13 +458,13 @@ typing-inspect = ">=0.4.0,<1"
 
 [[package]]
 name = "deepgram-sdk"
-version = "3.7.3"
+version = "3.7.5"
 description = "The official Python SDK for the Deepgram automated speech recognition platform."
 optional = false
 python-versions = "*"
 files = [
-    {file = "deepgram_sdk-3.7.3-py3-none-any.whl", hash = "sha256:889d6dd2e2f947a52ff24fa909b24d2880d15b207fbcb089c88efce64852a8ac"},
-    {file = "deepgram_sdk-3.7.3.tar.gz", hash = "sha256:80ca1505ba6d3d72e61da895ad6ef869013f93fdb4e18069252c3f35e58a44e1"},
+    {file = "deepgram_sdk-3.7.5-py3-none-any.whl", hash = "sha256:1bb60b267347c098a4497cc1c273a60b1a2d6271c0bf2527b6e6ae8fc38466e9"},
+    {file = "deepgram_sdk-3.7.5.tar.gz", hash = "sha256:db7b8bd18e3e6fad3ff394fa172e9158efe31c267131052bc0f48ab1e8bdfadc"},
 ]
 
 [package.dependencies]
@@ -1300,8 +1300,8 @@ langchain-core = ">=0.3.8,<0.4.0"
 langchain-text-splitters = ">=0.3.0,<0.4.0"
 langsmith = ">=0.1.17,<0.2.0"
 numpy = [
-    {version = ">=1.26.0,<2.0.0", markers = "python_version >= \"3.12\""},
     {version = ">=1,<2", markers = "python_version < \"3.12\""},
+    {version = ">=1.26.0,<2.0.0", markers = "python_version >= \"3.12\""},
 ]
 pydantic = ">=2.7.4,<3.0.0"
 PyYAML = ">=5.3"
@@ -1342,8 +1342,8 @@ jsonpatch = ">=1.33,<2.0"
 langsmith = ">=0.1.125,<0.2.0"
 packaging = ">=23.2,<25"
 pydantic = [
-    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
     {version = ">=2.5.2,<3.0.0", markers = "python_full_version < \"3.12.4\""},
+    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
 ]
 PyYAML = ">=5.3"
 tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<9.0.0"
@@ -1438,8 +1438,8 @@ files = [
 httpx = ">=0.23.0,<1"
 orjson = ">=3.9.14,<4.0.0"
 pydantic = [
-    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
     {version = ">=1,<3", markers = "python_full_version < \"3.12.4\""},
+    {version = ">=2.7.4,<3.0.0", markers = "python_full_version >= \"3.12.4\""},
 ]
 requests = ">=2,<3"
 requests-toolbelt = ">=1.0.0,<2.0.0"
@@ -2028,8 +2028,8 @@ files = [
 annotated-types = ">=0.6.0"
 pydantic-core = "2.23.4"
 typing-extensions = [
-    {version = ">=4.12.2", markers = "python_version >= \"3.13\""},
     {version = ">=4.6.1", markers = "python_version < \"3.13\""},
+    {version = ">=4.12.2", markers = "python_version >= \"3.13\""},
 ]
 
 [package.extras]
